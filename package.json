@@ -1,0 +1,41 @@
+{
+  "name": "Books_API",
+  "version": "1.0.0",
+  "description": "This is an API about books, we offer different types of books that user can search",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/D-Rosa99/Books_API.git"
+  },
+  "keywords": [
+    "@hapi/joi",
+    "CircleCi",
+    "Docker",
+    "express",
+    "jest",
+    "morgan",
+    "mysql",
+    "nodemon",
+    "prettier",
+    "Sequelize"
+  ],
+  "author": "David De La Rosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/D-Rosa99/Books_API/issues"
+  },
+  "homepage": "https://github.com/D-Rosa99/Books_API#readme",
+  "dependencies": {
+    "@hapi/joi": "17.1.1",
+    "express": "4.17.1"
+  },
+  "devDependencies": {
+    "jest": "25.2.7",
+    "morgan": "1.10.0",
+    "nodemon": "2.0.2"
+  }
+}
