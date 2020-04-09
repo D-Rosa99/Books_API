@@ -11,10 +11,15 @@ async function getSpecificBook(userInput) {
 
 module.exports = {
   getBookList: async (req, res) => {
-    const bookList = await Book.find().populate({
-      path: "genre",
-      select: "name -_id",
-    });
+    const limitPage = 2;
+    const page = req.query.page;
+    const bookList = await Book.find()
+      .skip((page - 1) * limitPage)
+      .limit(limitPage)
+      .populate({
+        path: "genre",
+        select: "name -_id",
+      });
 
     return res.status(200).json(bookList);
   },

@@ -7,7 +7,11 @@ async function getSpecificGenre(userInput) {
 
 module.exports = {
   getGenreList: async (req, res) => {
-    const genreList = await Genre.find();
+    const limitPage = 2;
+    const page = req.query.page;
+    const genreList = await Genre.find()
+      .skip((page - 1) * limitPage)
+      .limit(limitPage);
     return res.status(200).json(genreList);
   },
 
