@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
+const bookControllers = require("./controllers");
 
-router.get("/");
+router.get("/", bookControllers.getGenreList);
 
-router.get("/:id");
+router.get("/:name", bookControllers.getGenre);
 
-router.post("/");
+router.post("/", bookControllers.postGenre);
 
-router.put("/:id");
+router.put("/:name", bookControllers.updateGenre);
 
-router.delete("/:id");
+router.delete("/:name", bookControllers.deleteGenre);
 
-exports.router;
+module.exports = router;

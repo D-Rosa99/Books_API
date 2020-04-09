@@ -1,4 +1,2 @@
-const express = require("express");
-const app = express();
-
-require("./init/server_startUp")(app);
+require("./init/db_startUp")();
+require("./init/server_startUp")();
