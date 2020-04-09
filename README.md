@@ -12,7 +12,7 @@ Here is a list of technologies a used on this project:
 - express
 - Docker
 - CircleCi
-- Sequelize
+- Mongoose
 - Prettier
 
 ## How to run it

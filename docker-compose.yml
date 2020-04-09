@@ -1,0 +1,23 @@
+version: "3.1"
+
+services:
+  app:
+    image: Book_Api
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ".:/usr/app"
+      - "/node_modules"
+    links:
+      - mongo
+
+  mongo:
+    restart: always
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: Book_API
+      MONGO_INITDB_ROOT_USERNAME: root

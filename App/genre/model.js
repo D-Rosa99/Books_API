@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Joi = require("@hapi/joi");
 
 const Genre = mongoose.model(
-  "Genres",
+  "Genre",
   new mongoose.Schema({
     name: {
       type: String,

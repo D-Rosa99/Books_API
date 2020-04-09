@@ -2,14 +2,14 @@ const express = require("express");
 const router = express.Router();
 const bookControllers = require("./controllers");
 
-router.get("/", bookControllers.getGenreList);
+router.get("/", bookControllers.getBookList);
 
-router.get("/:name", bookControllers.getGenre);
+router.get("/:title", bookControllers.getBook);
 
-router.post("/", bookControllers.postGenre);
+router.post("/", bookControllers.postBook);
 
-router.put("/:name", bookControllers.updateGenre);
+router.put("/:title", bookControllers.updateBook);
 
-router.delete("/:name", bookControllers.deleteGenre);
+router.delete("/:title", bookControllers.deleteBook);
 
 module.exports = router;

@@ -10,8 +10,8 @@ const Book = mongoose.model(
       minlength: 2,
     },
     genre: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "Books",
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Genre",
       required: true,
     },
     author: {
@@ -48,7 +48,8 @@ inputValidation = (userInput) => {
     title: Joi.string().min(2).required(),
     genre: Joi.string().min(2).required(),
     author: Joi.string().min(2).required(),
-    publishDate: Joi.date().format("DD-MM-YYYY").utc(),
+    edition: Joi.string().required(),
+    publishDate: Joi.date().format("DD-MM-YYYY"),
     numberOfPages: Joi.number().required(),
     numberOfChapters: Joi.number().required(),
   });
