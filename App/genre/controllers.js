@@ -1,4 +1,4 @@
-const { Genre, inputValidation } = require("./model");
+const { Genre, inputValidation } = require('./model');
 
 async function getSpecificGenre(userInput) {
   const genre = await Genre.findOne({ name: userInput });
@@ -17,7 +17,7 @@ module.exports = {
 
   getGenre: async (req, res) => {
     const genre = await getSpecificGenre(req.params.name);
-    if (!genre) return res.status(404).send("That genre does not exist!");
+    if (!genre) return res.status(404).send('That genre does not exist!');
 
     return res.status(200).json(genre);
   },
@@ -27,11 +27,11 @@ module.exports = {
     if (error) return res.status(400).send(error.message);
 
     const genre = await getSpecificGenre(value.name);
-    if (genre) return res.status(400).send("That genre already exist!");
+    if (genre) return res.status(400).send('That genre already exist!');
 
     const newGenre = new Genre(value);
     await newGenre.save();
-    return res.status(200).send("Add it successfully!");
+    return res.status(200).send('Add it successfully!');
   },
 
   updateGenre: async (req, res) => {
@@ -39,16 +39,16 @@ module.exports = {
     if (error) return res.status(400).send(error.message);
 
     const findGenre = await getSpecificGenre(value.name);
-    if (findGenre) return res.status(400).send("That genre already exist!");
+    if (findGenre) return res.status(400).send('That genre already exist!');
 
     const genre = await Genre.findOneAndUpdate(
       { name: req.params.name },
       { $set: value },
       { useFindAndModify: false }
     );
-    if (!genre) return res.status(400).send("That genre does not exist!");
+    if (!genre) return res.status(400).send('That genre does not exist!');
 
-    return res.status(200).send("Update it successfully!");
+    return res.status(200).send('Update it successfully!');
   },
 
   deleteGenre: async (req, res) => {
@@ -56,8 +56,8 @@ module.exports = {
       { name: req.params.name },
       { useFindAndModify: false }
     );
-    if (!genre) return res.status(404).send("That genre does not exist!");
+    if (!genre) return res.status(404).send('That genre does not exist!');
 
-    return res.status(200).send("Delete it successfully!");
+    return res.status(200).send('Delete it successfully!');
   },
 };

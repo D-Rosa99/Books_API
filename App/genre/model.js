@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
-const Joi = require("@hapi/joi");
+const mongoose = require('mongoose');
+const Joi = require('@hapi/joi');
 
 const Genre = mongoose.model(
-  "Genre",
+  'Genre',
   new mongoose.Schema({
     name: {
       type: String,
@@ -12,7 +12,7 @@ const Genre = mongoose.model(
   })
 );
 
-inputValidation = (userInput) => {
+const inputValidation = (userInput) => {
   const genreSchema = Joi.object({
     name: Joi.string().min(2).required(),
   });
