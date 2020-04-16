@@ -6,13 +6,33 @@ async function getSpecificGenre(userInput) {
 }
 
 module.exports = {
-  getGenreList: async (req, res) => {
+  getGenreList: (req, res) => {
     const limitPage = 2;
     const page = req.query.page;
-    const genreList = await Genre.find()
-      .skip((page - 1) * limitPage)
-      .limit(limitPage);
-    return res.status(200).json(genreList);
+    if (page && page > 0) {
+      return Genre.find()
+        .countDocuments()
+        .then(async (totalGenre) => {
+          const skipPg = (page - 1) * limitPage;
+          const restGenre =
+            totalGenre -
+            (parseInt(page) === 1 ? limitPage : limitPage * parseInt(page));
+          const currentPage = parseInt(page) || 1;
+
+          const genreList = await Genre.find().skip(skipPg).limit(limitPage);
+
+          res.status(200).json({
+            totalGenre,
+            restOfGenre: restGenre > 0 ? restGenre : 0,
+            currentPage,
+            nextPage: restGenre > 0 ? currentPage + 1 : false,
+            prevPage: page - 1 <= 0 ? false : page - 1,
+            genreList,
+          });
+        });
+    }
+
+    return res.status(400).send('Please specify the page you want to reach!');
   },
 
   getGenre: async (req, res) => {

@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
-const Joi = require("@hapi/joi").extend(require("@hapi/joi-date"));
+const mongoose = require('mongoose');
+const Joi = require('@hapi/joi').extend(require('@hapi/joi-date'));
 
 const Book = mongoose.model(
-  "Books",
+  'Books',
   new mongoose.Schema({
     title: {
       type: String,
@@ -11,7 +11,7 @@ const Book = mongoose.model(
     },
     genre: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Genre",
+      ref: 'Genre',
       required: true,
     },
     author: {
@@ -43,13 +43,13 @@ const Book = mongoose.model(
   })
 );
 
-inputValidation = (userInput) => {
+const inputValidation = (userInput) => {
   const bookSchema = Joi.object({
     title: Joi.string().min(2).required(),
     genre: Joi.string().min(2).required(),
     author: Joi.string().min(2).required(),
     edition: Joi.string().required(),
-    publishDate: Joi.date().format("DD-MM-YYYY"),
+    publishDate: Joi.date().format('DD-MM-YYYY'),
     numberOfPages: Joi.number().required(),
     numberOfChapters: Joi.number().required(),
   });

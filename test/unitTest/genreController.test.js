@@ -6,6 +6,9 @@ jest.mock('../../App/genre/model');
 const req = jest.fn();
 const res = jest.fn();
 
+req.query = jest.fn();
+req.query.page = 1;
+
 res.status = (num) => ({
   json: (data) => ({ data, status: num }),
   send: (message) => ({ message, status: num }),
@@ -19,16 +22,13 @@ describe('Mock information to test', () => {
       { _id: 3, name: 'romantic', _v: 0 },
     ];
 
-    req.query = jest.fn(() => {
-      page: 1;
-    });
-
     Genre.find = jest.fn(() => ({
-      skip: () => ({ limit: () => data }),
+      countDocuments: jest.fn(() => ({
+        then: jest.fn().mockReturnValue({ status: 200, data }),
+      })),
     }));
 
     const result = await getGenreList(req, res);
-
     expect(Genre.find).toHaveBeenCalled();
     expect(result.status).toBe(200);
     expect(result.data).toMatchObject(data);

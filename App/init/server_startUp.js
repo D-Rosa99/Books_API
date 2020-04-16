@@ -6,11 +6,14 @@ const logger = require('../logger/index');
 const genreRouters = require('../genre/routers');
 const bookRouters = require('../book/routers');
 
-const port = 3000 || process.env.port;
-module.exports = () => {
-  app.use(morgan('dev'));
-  app.use(express.json());
-  app.use('/api/Book_API/genre/', genreRouters);
-  app.use('/api/Book_API/book/', bookRouters);
-  app.listen(port, () => logger.info(`Server started on port ${port}`));
-};
+require('./db_startUp')();
+
+app.use(morgan('dev'));
+app.use(express.json());
+app.use('/api/book_api/genre/', genreRouters);
+app.use('/api/book_api/book/', bookRouters);
+const server = app.listen(3000, () =>
+  logger.info(`Server started on port 3000`)
+);
+
+module.exports = server;
