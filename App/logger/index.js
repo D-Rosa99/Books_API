@@ -1,8 +1,8 @@
-const { transports, format, createLogger } = require('winston');
+import { transports, format, createLogger } from 'winston';
 
 const logger = createLogger({
   format: format.combine(format.simple()),
   transports: [new transports.Console({ level: 'debug' })],
 });
 
-module.exports = logger;
+export default logger;

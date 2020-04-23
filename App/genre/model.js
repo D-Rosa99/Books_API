@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Joi = require('@hapi/joi');
+import mongoose from 'mongoose';
+import Joi from '@hapi/joi';
 
 const Genre = mongoose.model(
   'Genre',
@@ -20,4 +20,4 @@ const inputValidation = (userInput) => {
   return genreSchema.validate(userInput);
 };
 
-module.exports = { Genre, inputValidation };
+export { Genre, inputValidation };

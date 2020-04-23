@@ -13,7 +13,6 @@
   },
   "plugins": ["prettier", "node"],
   "rules": {
-    "import/no-commonjs": 0,
     "no-console": 1
   }
 }

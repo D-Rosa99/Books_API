@@ -1,15 +1,16 @@
-const express = require("express");
+import express from 'express';
+import genreControllers from './controllers';
+
 const router = express.Router();
-const genreControllers = require("./controllers");
 
-router.get("/", genreControllers.getGenreList);
+router.get('/', genreControllers.getGenreList);
 
-router.get("/:name", genreControllers.getGenre);
+router.get('/:name', genreControllers.getGenre);
 
-router.post("/", genreControllers.postGenre);
+router.post('/', genreControllers.postGenre);
 
-router.put("/:name", genreControllers.updateGenre);
+router.put('/:name', genreControllers.updateGenre);
 
-router.delete("/:name", genreControllers.deleteGenre);
+router.delete('/:name', genreControllers.deleteGenre);
 
-module.exports = router;
+export default router;

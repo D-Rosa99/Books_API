@@ -1,11 +1,11 @@
-const { Genre, inputValidation } = require('./model');
+import { Genre, inputValidation } from './model';
 
 async function getSpecificGenre(userInput) {
   const genre = await Genre.findOne({ name: userInput });
   return genre;
 }
 
-module.exports = {
+export default {
   getGenreList: (req, res) => {
     const limitPage = 2;
     const page = req.query.page;

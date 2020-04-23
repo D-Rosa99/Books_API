@@ -1,10 +1,10 @@
-FROM node:10
+FROM node:10.13.0
 
 WORKDIR /usr/app
 
 COPY package*.json ./
 
-RUN npm intall
+RUN npm install
 
 COPY . .
 

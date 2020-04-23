@@ -1,12 +1,13 @@
-const morgan = require('morgan');
-const express = require('express');
+import morgan from 'morgan';
+import express from 'express';
+import logger from '../logger/index';
+
+import genreRouters from '../genre/routers';
+import bookRouters from '../book/routers';
+import dbInit from './db_startUp';
+
+dbInit();
 const app = express();
-const logger = require('../logger/index');
-
-const genreRouters = require('../genre/routers');
-const bookRouters = require('../book/routers');
-
-require('./db_startUp')();
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -16,4 +17,4 @@ const server = app.listen(3000, () =>
   logger.info(`Server started on port 3000`)
 );
 
-module.exports = server;
+export default server;

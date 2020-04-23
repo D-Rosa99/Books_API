@@ -1,15 +1,15 @@
-const { Book, inputValidation } = require("./model");
-const { Genre } = require("../genre/model");
+import { Book, inputValidation } from './model';
+import { Genre } from '../genre/model';
 
 async function getSpecificBook(userInput) {
   const book = await Book.findOne({ title: userInput }).populate({
-    path: "genre",
-    select: "name -_id",
+    path: 'genre',
+    select: 'name -_id',
   });
   return book;
 }
 
-module.exports = {
+export default {
   getBookList: async (req, res) => {
     const limitPage = 2;
     const page = req.query.page;
@@ -17,8 +17,8 @@ module.exports = {
       .skip((page - 1) * limitPage)
       .limit(limitPage)
       .populate({
-        path: "genre",
-        select: "name -_id",
+        path: 'genre',
+        select: 'name -_id',
       });
 
     return res.status(200).json(bookList);
@@ -26,7 +26,7 @@ module.exports = {
 
   getBook: async (req, res) => {
     const book = await getSpecificBook(req.params.title);
-    if (!book) return res.status(404).send("That book does not exist!");
+    if (!book) return res.status(404).send('That book does not exist!');
 
     return res.status(200).json(book);
   },
@@ -36,15 +36,15 @@ module.exports = {
     if (error) return res.status(400).send(error.message);
 
     const book = await getSpecificBook(value.title);
-    if (book) return res.status(400).send("That book already exist!");
+    if (book) return res.status(400).send('That book already exist!');
 
     const getGenre = await Genre.findOne({ name: value.genre });
-    if (!getGenre) return res.status(404).send("That genre does not exist!");
+    if (!getGenre) return res.status(404).send('That genre does not exist!');
 
     value.genre = getGenre._id;
     const newBook = new Book(value);
     await newBook.save();
-    return res.status(200).send("Add it successfully!");
+    return res.status(200).send('Add it successfully!');
   },
 
   updateBook: async (req, res) => {
@@ -52,10 +52,10 @@ module.exports = {
     if (error) return res.status(400).send(error.message);
 
     const findBook = await getSpecificBook(value.title);
-    if (findBook) return res.status(400).send("That book already exist!");
+    if (findBook) return res.status(400).send('That book already exist!');
 
     const getGenre = await Genre.findOne({ name: value.genre });
-    if (!getGenre) return res.status(404).send("That genre does not exist!");
+    if (!getGenre) return res.status(404).send('That genre does not exist!');
 
     value.genre = getGenre._id;
     const book = await Book.findOneAndUpdate(
@@ -63,9 +63,9 @@ module.exports = {
       { $set: value },
       { useFindAndModify: false }
     );
-    if (!book) return res.status(400).send("That book does not exist!");
+    if (!book) return res.status(400).send('That book does not exist!');
 
-    return res.status(200).send("Update it successfully!");
+    return res.status(200).send('Update it successfully!');
   },
 
   deleteBook: async (req, res) => {
@@ -73,8 +73,8 @@ module.exports = {
       { title: req.params.title },
       { useFindAndModify: false }
     );
-    if (!book) return res.status(404).send("That book does not exist!");
+    if (!book) return res.status(404).send('That book does not exist!');
 
-    return res.status(200).send("Delete it successfully!");
+    return res.status(200).send('Delete it successfully!');
   },
 };

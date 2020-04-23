@@ -1,9 +1,10 @@
-const mongoose = require('mongoose');
-const logger = require('../logger/index');
-const config = require('config');
+import mongoose from 'mongoose';
+import logger from '../logger/index';
+import config from 'config';
+
 const db = config.get('db');
 
-module.exports = () =>
+export default () =>
   mongoose
     .connect(db, {
       useNewUrlParser: true,

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Joi = require('@hapi/joi').extend(require('@hapi/joi-date'));
+import mongoose from 'mongoose';
+import Joi from '@hapi/joi';
 
 const Book = mongoose.model(
   'Books',
@@ -57,4 +57,4 @@ const inputValidation = (userInput) => {
   return bookSchema.validate(userInput);
 };
 
-module.exports = { Book, inputValidation };
+export { Book, inputValidation };

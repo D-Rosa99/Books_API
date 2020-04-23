@@ -1,15 +1,16 @@
-const express = require("express");
+import express from 'express';
+import bookControllers from './controllers';
+
 const router = express.Router();
-const bookControllers = require("./controllers");
 
-router.get("/", bookControllers.getBookList);
+router.get('/', bookControllers.getBookList);
 
-router.get("/:title", bookControllers.getBook);
+router.get('/:title', bookControllers.getBook);
 
-router.post("/", bookControllers.postBook);
+router.post('/', bookControllers.postBook);
 
-router.put("/:title", bookControllers.updateBook);
+router.put('/:title', bookControllers.updateBook);
 
-router.delete("/:title", bookControllers.deleteBook);
+router.delete('/:title', bookControllers.deleteBook);
 
-module.exports = router;
+export default router;
