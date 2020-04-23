@@ -1,7 +1,7 @@
-const { getGenreList, postGenre } = require('../../App/genre/controllers');
-const { Genre, inputValidation } = require('../../App/genre/model');
+import GenreController from '../../app/genre/controllers';
+import { Genre, inputValidation } from '../../app/genre/model';
 
-jest.mock('../../App/genre/model');
+jest.mock('../../app/genre/model');
 
 const req = jest.fn();
 const res = jest.fn();
@@ -28,7 +28,7 @@ describe('Mock information to test', () => {
       })),
     }));
 
-    const result = await getGenreList(req, res);
+    const result = await GenreController.getGenreList(req, res);
     expect(Genre.find).toHaveBeenCalled();
     expect(result.status).toBe(200);
     expect(result.data).toMatchObject(data);
@@ -42,7 +42,7 @@ describe('Mock another function to pretend an Invocation', () => {
       value: false,
     }));
 
-    const result = await postGenre(req, res);
+    const result = await GenreController.postGenre(req, res);
 
     expect(result.status).toBe(400);
     expect(result.message).toBe('There is a field that should not be there');

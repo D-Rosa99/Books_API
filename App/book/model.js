@@ -49,7 +49,7 @@ const inputValidation = (userInput) => {
     genre: Joi.string().min(2).required(),
     author: Joi.string().min(2).required(),
     edition: Joi.string().required(),
-    publishDate: Joi.date().format('DD-MM-YYYY'),
+    publishDate: Joi.date(),
     numberOfPages: Joi.number().required(),
     numberOfChapters: Joi.number().required(),
   });

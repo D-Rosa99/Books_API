@@ -1,10 +1,10 @@
-const request = require('supertest');
-const { Genre } = require('../../App/genre/model');
-let server;
+import request from 'supertest';
+import { Genre } from '../../app/genre/model';
+import server from '../../app/init/server_startUp';
 
 describe('Get genres from the database', () => {
   beforeEach(() => {
-    server = require('../../App/init/server_startUp');
+    server;
   });
 
   afterEach(async () => {
@@ -32,18 +32,11 @@ describe('Get genres from the database', () => {
     expect(getGenre.status).toBe(200);
     expect(getGenre.body).toMatchObject(data);
   });
-
-  it('Should return a friendly error if the user does not specify the page', async () => {
-    const errGenrer = await request(server).get('/api/book_api/genre');
-
-    expect(errGenrer.status).toBe(400);
-    expect(errGenrer.text).toBe('Please specify the page you want to reach!');
-  });
 });
 
 describe('Post a genre to the database', () => {
   beforeEach(() => {
-    server = require('../../App/init/server_startUp');
+    server;
   });
 
   afterEach(async () => {
@@ -53,7 +46,7 @@ describe('Post a genre to the database', () => {
 
   it('Should let you add a genre to the database', async () => {
     const postGenre = await request(server)
-      .post('/api/book_api/genre')
+      .post('/api/book_api/genre/')
       .send({ name: 'horror' });
 
     expect(postGenre.status).toBe(200);

@@ -1,4 +1,4 @@
-const formatPrice = require('../../App/utils/formatPrice');
+import formatPrice from '../../app/utils/formatPrice';
 
 describe('This is normally test', () => {
   it('Should return a USA dollar format price', () => {

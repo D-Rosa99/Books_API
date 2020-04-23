@@ -6,18 +6,16 @@ async function getSpecificGenre(userInput) {
 }
 
 export default {
-  getGenreList: (req, res) => {
-    const limitPage = 2;
-    const page = req.query.page;
+  getGenreList: async (req, res) => {
+    const { limitPage = 2, page } = req.query;
+
     if (page && page > 0) {
       return Genre.find()
         .countDocuments()
         .then(async (totalGenre) => {
           const skipPg = (page - 1) * limitPage;
-          const restGenre =
-            totalGenre -
-            (parseInt(page) === 1 ? limitPage : limitPage * parseInt(page));
-          const currentPage = parseInt(page) || 1;
+          const restGenre = totalGenre - limitPage * parseInt(page);
+          const currentPage = parseInt(page);
 
           const genreList = await Genre.find().skip(skipPg).limit(limitPage);
 
@@ -32,7 +30,11 @@ export default {
         });
     }
 
-    return res.status(400).send('Please specify the page you want to reach!');
+    if (page < 0)
+      return res.status(400).send('The page should be greater than 0');
+
+    const genreList = await Genre.find().limit(parseInt(limitPage));
+    return res.status(200).json(genreList);
   },
 
   getGenre: async (req, res) => {

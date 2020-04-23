@@ -11,16 +11,42 @@ async function getSpecificBook(userInput) {
 
 export default {
   getBookList: async (req, res) => {
-    const limitPage = 2;
-    const page = req.query.page;
-    const bookList = await Book.find()
-      .skip((page - 1) * limitPage)
-      .limit(limitPage)
-      .populate({
-        path: 'genre',
-        select: 'name -_id',
-      });
+    const { limitPage = 2, page } = req.query;
 
+    if (page && page > 0) {
+      return Book.find()
+        .countDocuments()
+        .then(async (totalBook) => {
+          const skipPg = (page - 1) * limitPage;
+          const restBook = totalBook - limitPage * parseInt(page);
+          const currentPage = parseInt(page);
+
+          const bookList = await Book.find()
+            .skip(skipPg)
+            .limit(limitPage)
+            .populate({
+              path: 'genre',
+              select: 'name -_id',
+            });
+
+          res.status(200).json({
+            totalBook,
+            resOfBook: restBook > 0 ? restBook : 0,
+            currentPage,
+            nextPage: restBook > 0 ? currentPage + 1 : false,
+            prevPage: page - 1 <= 0 ? false : page - 1,
+            bookList,
+          });
+        });
+    }
+
+    if (page < 0)
+      return res.status(400).send('The page should be greater than 0');
+
+    const bookList = await Book.find().limit(parseInt(limitPage)).populate({
+      path: 'genre',
+      select: 'name -_id',
+    });
     return res.status(200).json(bookList);
   },
 
