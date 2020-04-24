@@ -1,4 +1,4 @@
-import formatPrice from '../../app/utils/formatPrice';
+const { default: formatPrice } = require('../../app/utils/formatPrice');
 
 describe('This is normally test', () => {
   it('Should return a USA dollar format price', () => {

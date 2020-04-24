@@ -1,6 +1,11 @@
 import { Book, inputValidation } from './model';
 import { Genre } from '../genre/model';
 
+async function getSpecificGenre(genre) {
+  const getGenre = await Genre.findOne({ name: genre });
+  return getGenre;
+}
+
 async function getSpecificBook(userInput) {
   const book = await Book.findOne({ title: userInput }).populate({
     path: 'genre',
@@ -11,10 +16,21 @@ async function getSpecificBook(userInput) {
 
 export default {
   getBookList: async (req, res) => {
-    const { limitPage = 2, page } = req.query;
+    const {
+      limitPage = 2,
+      page = 1,
+      author,
+      title,
+      edition,
+      genreName,
+    } = req.query;
+    const existParams = Object.entries(req.query)[0];
 
-    if (page && page > 0) {
+    if (existParams && existParams[0] !== 'limitPage' && page > 0) {
+      const genre = await getSpecificGenre(genreName);
+
       return Book.find()
+        .or([{ author }, { title }, { edition }, { genre }])
         .countDocuments()
         .then(async (totalBook) => {
           const skipPg = (page - 1) * limitPage;
@@ -22,8 +38,9 @@ export default {
           const currentPage = parseInt(page);
 
           const bookList = await Book.find()
+            .or([{ author }, { title }, { edition }, { genre }])
             .skip(skipPg)
-            .limit(limitPage)
+            .limit(parseInt(limitPage))
             .populate({
               path: 'genre',
               select: 'name -_id',
@@ -64,7 +81,7 @@ export default {
     const book = await getSpecificBook(value.title);
     if (book) return res.status(400).send('That book already exist!');
 
-    const getGenre = await Genre.findOne({ name: value.genre });
+    const getGenre = await getSpecificGenre(value.genre);
     if (!getGenre) return res.status(404).send('That genre does not exist!');
 
     value.genre = getGenre._id;

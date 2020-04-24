@@ -1,5 +1,5 @@
-import GenreController from '../../app/genre/controllers';
-import { Genre, inputValidation } from '../../app/genre/model';
+const { default: GenreController } = require('../../app/genre/controllers');
+const { Genre, inputValidation } = require('../../app/genre/model');
 
 jest.mock('../../app/genre/model');
 

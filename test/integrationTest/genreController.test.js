@@ -2,7 +2,7 @@ import request from 'supertest';
 import { Genre } from '../../app/genre/model';
 import server from '../../app/init/server_startUp';
 
-describe('Get genres from the database', () => {
+describe.skip('Get genres from the database', () => {
   beforeEach(() => {
     server;
   });
@@ -34,7 +34,7 @@ describe('Get genres from the database', () => {
   });
 });
 
-describe('Post a genre to the database', () => {
+describe.skip('Post a genre to the database', () => {
   beforeEach(() => {
     server;
   });
