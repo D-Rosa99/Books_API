@@ -1,6 +1,6 @@
-import request from 'supertest';
-import { Genre } from '../../app/genre/model';
-import server from '../../app/init/server_startUp';
+const request = require('supertest');
+const { Genre } = require('../../app/genre/model');
+let { default: server } = require('../../app/init/server_startUp');
 
 describe.skip('Get genres from the database', () => {
   beforeEach(() => {
