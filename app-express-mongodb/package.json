@@ -5,8 +5,8 @@
   "main": "app/init/server_startUp.js",
   "scripts": {
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log",
-    "start": "npm run build && node dist/app/init/server_startUp.js",
-    "start:dev": "nodemon --exec babel-node app/init/server_startUp.js",
+    "start": "npm run build && node dist/App/init/server_startUp.js",
+    "start:dev": "nodemon --exec babel-node App/init/server_startUp.js",
     "test": "jest --verbose",
     "test:watch": "jest --watch",
     "lint": "eslint --fix --env node . --ext js",

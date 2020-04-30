@@ -1,4 +1,4 @@
-const { default: formatPrice } = require('../../app/utils/formatPrice');
+const { default: formatPrice } = require('../../App/utils/formatPrice');
 
 describe('This is normally test', () => {
   it('Should return a USA dollar format price', () => {

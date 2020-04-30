@@ -1,7 +1,7 @@
-const { default: GenreController } = require('../../app/genre/controllers');
-const { Genre, inputValidation } = require('../../app/genre/model');
+const { default: GenreController } = require('../../App/genre/controllers');
+const { Genre, inputValidation } = require('../../App/genre/model');
 
-jest.mock('../../app/genre/model');
+jest.mock('../../App/genre/model');
 
 const req = jest.fn();
 const res = jest.fn();
