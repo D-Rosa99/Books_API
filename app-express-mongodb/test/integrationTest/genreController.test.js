@@ -2,7 +2,7 @@ const request = require('supertest');
 const { Genre } = require('../../App/genre/model');
 let { default: server } = require('../../App/init/server_startUp');
 
-describe('Get genres from the database', () => {
+describe.skip('Get genres from the database', () => {
   beforeEach(() => {
     server;
   });
@@ -34,7 +34,7 @@ describe('Get genres from the database', () => {
   });
 });
 
-describe('Post a genre to the database', () => {
+describe.skip('Post a genre to the database', () => {
   beforeEach(() => {
     server;
   });

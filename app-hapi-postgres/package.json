@@ -1,0 +1,38 @@
+{
+  "name": "app-hapi-postgres",
+  "version": "1.0.0",
+  "description": "This is a project to train my knowledge of hapi and postgres",
+  "main": "index.js",
+  "scripts": {
+    "build": "",
+    "start": "",
+    "start:dev": "nodemon ./app/index.js",
+    "lint": "eslint --ext js . --fix",
+    "prettier": "prettier --write .",
+    "test": "jest --verbose",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "Postgres",
+    "Hapi",
+    "Prettier",
+    "Eslint",
+    "morgan",
+    "winston",
+    "config",
+    "jest",
+    "Sequelize",
+    "husky"
+  ],
+  "author": "David De La Rosa",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "19.1.1",
+    "pg": "8.0.3",
+    "pg-hstore": "2.3.3",
+    "sequelize": "5.21.7"
+  },
+  "devDependencies": {
+    "mongoose": "5.9.10"
+  }
+}
