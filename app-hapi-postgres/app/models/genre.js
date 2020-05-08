@@ -1,6 +1,6 @@
-const Sequelize = require('sequelize');
+import Sequelize from 'sequelize';
 
-const db = require('../init/db_startUp');
+import db from '../init/db_startUp';
 
 const Genre = db.define('genre', {
   id: {
@@ -15,4 +15,4 @@ const Genre = db.define('genre', {
   },
 });
 
-module.exports = Genre;
+export default Genre;

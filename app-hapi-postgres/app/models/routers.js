@@ -1,9 +1,7 @@
-module.exports = [
+export default [
   {
     method: 'GET',
     path: '/',
-    handler: () => {
-      return 'Hello World!';
-    },
+    handler: () => 'Hello World!',
   },
 ];

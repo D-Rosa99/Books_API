@@ -1,5 +1,6 @@
-const Hapi = require('@hapi/hapi');
-const routers = require('../models/routers');
+import Hapi from '@hapi/hapi';
+import morgan from 'morgan';
+import routers from '../models/routers';
 
 const server = Hapi.server({
   port: 3000,
@@ -13,4 +14,4 @@ const initServer = async () => {
   console.log('Server start up on port %s', server.info.port);
 };
 
-module.exports = { server, initServer };
+export { server, initServer };

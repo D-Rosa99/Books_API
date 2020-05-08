@@ -1,8 +1,8 @@
-const Sequelize = require('sequelize');
+import Sequelize from 'sequelize';
 
 const db = new Sequelize('intellisys-training', 'postgres', 'postgres', {
-  host: 'localhost',
+  host: 'db',
   dialect: 'postgres',
 });
 
-module.exports = db;
+export default db;
