@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const db = new Sequelize('playground', 'postgres', '123456789', {
+const db = new Sequelize('intellisys-training', 'postgres', 'postgres', {
   host: 'localhost',
   dialect: 'postgres',
 });

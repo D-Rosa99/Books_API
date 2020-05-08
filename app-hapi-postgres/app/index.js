@@ -12,4 +12,4 @@ db.authenticate()
   .then(() => {
     console.log('database conected');
   })
-  .catch((err) => console.log('Something went wrong: ', err));
+  .catch((err) => console.log('Please check went wrong: ', err));
