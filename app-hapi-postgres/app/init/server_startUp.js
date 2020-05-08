@@ -1,6 +1,7 @@
 import Hapi from '@hapi/hapi';
-import morgan from 'morgan';
+import laabr from 'laabr';
 import routers from '../models/routers';
+import logger from '../utils/logger';
 
 const server = Hapi.server({
   port: 3000,
@@ -10,8 +11,21 @@ const server = Hapi.server({
 server.route(routers);
 
 const initServer = async () => {
+  await server.register({
+    plugin: laabr,
+    options: {
+      formats: {
+        onPostStart: ':time :start :level :message',
+        log: false,
+      },
+      tokens: { start: () => '[start]' },
+      indent: 0,
+      colored: true,
+    },
+  });
+
   await server.start();
-  console.log('Server start up on port %s', server.info.port);
+  logger.info(`Server start up on port ${server.info.port}`);
 };
 
 export { server, initServer };
