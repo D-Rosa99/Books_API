@@ -1,14 +1,14 @@
 import Hapi from '@hapi/hapi';
 import laabr from 'laabr';
-import routers from '../models/routers';
+// import genreRouters from '../routes/genre';
+import bookRouters from '../routes/book';
 import logger from '../utils/logger';
-
 const server = Hapi.server({
   port: 3000,
   host: '0.0.0.0',
 });
 
-server.route(routers);
+server.route(bookRouters);
 
 const initServer = async () => {
   await server.register({

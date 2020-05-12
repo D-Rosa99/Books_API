@@ -1,21 +1,21 @@
 import { initServer } from './init/server_startUp';
 import db from './init/db_startUp';
+import logger from './utils/logger';
 
 process.on('unhandledRejection', (err) => {
-  console.log(err);
-  process.exit(1);
+  logger.error(err);
 });
 
 db.authenticate()
   .then(() => {
-    console.log('database conected');
+    logger.info('database conected');
   })
-  .catch((err) => console.log('Something went wrong: ', err));
+  .catch((err) => logger.error('Something went wrong: ', err));
 
 db.sync()
   .then(() => {
     initServer();
   })
   .catch((err) => {
-    console.log('Something went wrong during syncronization ', err);
+    logger.error('Something went wrong during syncronization ', err);
   });
